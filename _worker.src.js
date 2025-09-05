@@ -2073,7 +2073,7 @@ async function getCFSum(accountId, accountIndex, email, key, startDate, endDate)
 
 const MY_KV_UUID_KEY = atob('VVVJRA==');
 async function checkKVNamespaceBinding(env) {
-	if (typeof env.amclubs === 'undefined') {
+	if (typeof env.a2jsjs === 'undefined') {
 		return new Response('Error: amclubs KV_NAMESPACE is not bound.', {
 			status: 400,
 		})
@@ -2081,7 +2081,7 @@ async function checkKVNamespaceBinding(env) {
 }
 
 async function getKVData(env) {
-	const value = await env.amclubs.get(MY_KV_UUID_KEY);
+	const value = await env.a2jsjs.get(MY_KV_UUID_KEY);
 	return value ? String(value) : '';
 	// return new Response(value || 'Key not found', {
 	// 	status: value ? 200 : 404
@@ -2097,10 +2097,10 @@ async function setKVData(request, env) {
 	// console.log(`setKVData----> Received value: ${value} \n`);
 
 	try {
-		await env.amclubs.put(MY_KV_UUID_KEY, value);
+		await env.a2jsjs.put(MY_KV_UUID_KEY, value);
 
 		// 读取存入的值，确认是否成功
-		const storedValue = await env.amclubs.get(MY_KV_UUID_KEY);
+		const storedValue = await env.a2jsjs.get(MY_KV_UUID_KEY);
 		if (storedValue === value) {
 			return new Response(`${MY_KV_UUID_KEY} updated successfully`, { status: 200 });
 		} else {
